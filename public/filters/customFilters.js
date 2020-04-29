@@ -15,5 +15,5 @@ angular.module("customFilters", [])
 		} else {
 			return data;
 		}
-	});
+	}
 });
