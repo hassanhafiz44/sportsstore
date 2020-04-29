@@ -12,8 +12,13 @@ router.get('/', async (req, res) => {
 	}
 });
 
-router.get('/:id', (req, res) => {
-	res.status(501).end();
+router.get('/:id', async (req, res) => {
+	try {
+		const order = await Order.findById(req.params.id);
+		res.json(order);
+	} catch (error) {
+		res.status(400).json(error);
+	}
 });
 
 router.post('/', async (req, res) => {
