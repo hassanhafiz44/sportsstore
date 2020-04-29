@@ -9,23 +9,27 @@
 	</script>
 	<script src="controllers/sportsStore.js"></script>
 	<script src="filters/customFilters.js"></script>
+	<script src="controllers/productListControllers.js"></script>
 </head>
 <body ng-controller="sportsStoreCtrl">
 	<div class="navbar bg-dark navbar-dark">
 		<a class="navbar-brand" href="#">SPORTS STORE</a>
 	</div>
-	<div class="card">
+	<div class="card" ng-controller="productListCtrl">
 		<div class="card-body">
 			<div class="row">
 				<div class="col-sm-3">
 					<a ng-click="selectCategory()"
-						class="btn btn-block btn-success btn-lg">Home</a>
+						class="btn btn-block btn-lg"
+						ng-class="getCategoryClass(item)">Home</a>
 					<a ng-repeat="item in data.products | orderBy: 'category'
 						| unique:'category'" ng-click="selectCategory(item)"
-						class="btn btn-block btn-success btn-lg">{{item}}</a>
+						class="btn btn-block btn-lg"
+						ng-class="getCategoryClass(item)">{{item}}</a>
 				</div>
 				<div class="col-sm-9">
-					<div class="card m-2" ng-repeat="item in data.products">
+					<div class="card m-2" ng-repeat="item in data.products 
+						| filter:categoryFilterFn">
 						<div class="card-body">
 							<h3>
 								<strong>{{item.name}}</strong>
