@@ -33,8 +33,13 @@ router.post('/', async (req, res) => {
 	}
 });
 
-router.delete('/:id', (req, res) => {
-	res.status(501).end();
+router.delete('/:id', async (req, res) => {
+	try {
+		const acknowledgement = await Order.deleteOne({ _id: req.params.id });
+		res.json(acknowledgement);
+	} catch (error) {
+		res.status(400).json(error);
+	}
 });
 
 router.put('/:id', (req, res) => {
