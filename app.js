@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 require('dotenv').config();
 const productsRoute = require('./routes/products');
+const ordersRoute = require('./routes/orders');
 
 
 const app = express();
@@ -11,6 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/products', productsRoute);
+app.use('/api/orders', ordersRoute);
 
 
 mongoose.connect(
